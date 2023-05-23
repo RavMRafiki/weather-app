@@ -13,28 +13,33 @@ form.addEventListener("submit", (e) => {
     .then((data) => {
       const { main, name, sys, weather } = data;
       const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
-      const li = document.createElement("li");
+      const li = document.createElement("div");
       li.classList.add("city");
-      const markup = ` 
-<h2 class="city-name" data-name="${name},${sys.country}"> 
-<span>${name}</span> 
-<sup>${sys.country}</sup> 
-</h2> 
-<div class="city-temp">${Math.round(main.temp)}<sup>°C</sup> 
-</div> 
-<figure> 
-<img class="city-icon" src=${icon} alt=${weather[0]["main"]}> 
-<figcaption>${weather[0]["description"]}</figcaption> 
-</figure> 
+      li.classList.add("col");
+      li.classList.add("m-3");
+
+      const markup = ` <div class="card mx-auto" style="width: 18rem">
+            <img
+              src="${icon}"
+              class="card-img-top city-icon"
+              alt="${weather[0]}"
+            />
+            <div class="card-body bg-warning-subtle">
+              <h5 class="card-title">${name} <sup>${sys.country}</sup></h5>
+              <p class="card-text display-5">
+                ${Math.round(main.temp)}<sup>°C</sup>
+              </p>
+            </div>
+          </div> 
 `;
       li.innerHTML = markup;
       list.appendChild(li);
     })
     .catch(() => {
-      msg.textContent = "Please search for a valid city 😩";
+      msg.classList.remove("visually-hidden");
     });
 
-  msg.textContent = "";
+  msg.classList.add("visually-hidden");
   form.reset();
   input.focus();
 });
