@@ -13,7 +13,7 @@
     />
     <title>Weather App</title>
   </head>
-  <body>
+  <body class="bg-body-tertiary">
     <section class="top-banner">
       <div class="container">
         <h1 class="display-1 heading m-4 text-center">Simple Weather App</h1>
@@ -34,13 +34,15 @@
             Submit
           </button>
 
-          <span class="msg"></span>
+          <div class="alert alert-primary msg visually-hidden" role="alert">
+            Please search a valid city
+          </div>
         </form>
       </div>
     </section>
     <section class="ajax-section">
       <div class="container">
-        <ul class="cities"></ul>
+        <div class="cities row"></div>
       </div>
     </section>
     <script
